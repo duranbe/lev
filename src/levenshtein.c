@@ -9,28 +9,22 @@ static PyObject *levenshtein(PyObject *self, PyObject *args){
 	
 	char *string1, *string2 = NULL;
 
-
 	/* Parse arguments */
 	if(!PyArg_ParseTuple(args,"ss",&string1,&string2)){
 		/*args are type of PyObject, ss is format specifier 
 
-		&str and &filename are pointers to local variables */
+		&string1 and &string2 are pointers to local variables */
 		return NULL;
 	}
 
+
 	int length_1 = strlen(string1);
     int length_2 = strlen(string2);
+	int tab[length_1+1][length_2+1];
 
-    int tab[length_1+1][length_2+1];
-
-    for(int i = 0 ; i<length_2+1; i++){
-        tab[0][i] = i;
-    }
-
-    for(int i = 0; i<length_1+1; i++){
-        tab[i][0] = i;
-    }
-
+    for(int i = 0 ; i<length_2+1; i++) tab[0][i] = i;
+	for(int i = 0; i<length_1+1; i++) tab[i][0] = i;
+        
     for(int i=1; i<length_1+1; i++) {
           for(int j=1;j<length_2+1;j++) {
             tab[i][j]=0;
@@ -58,20 +52,18 @@ static PyObject *levenshtein(PyObject *self, PyObject *args){
           
     }
 
-	
-
-
 	/* return PyLongObject which is an integer in Python*/
 	return PyLong_FromLong(tab[length_1][length_2]);
 }
 
 
 static PyMethodDef LevenshteinMethods[] = {
-	/*tell python module about the method (def)
+	
+	/*Define the levenshtein methode
 
-	fputs: name the user need to write to call
+	levenshtein: name of the method (Python)
 
-	method_fputs: name of the C function to invoke
+	levenshtein: name of the C function to invoke
 
 	METH_VARARGS: flag that tell the interpreter that the 
 	function accept two arguments of type PyObject
