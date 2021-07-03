@@ -16,4 +16,6 @@ python3 setup.py install
 >>> import levenshtein
 >>> levenshtein.levenshtein("TEST","TESTS")
 1
+>>> levenshtein.levenshtein("DOG","DOGGOS")
+3
 ```
