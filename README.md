@@ -1,6 +1,7 @@
 # lev
 Levenshtein distance function as C Extension for Python 3
 
+![Test](https://github.com/duranbe/lev/actions/workflows/python-app.yml/badge.svg)
 
 See https://en.wikipedia.org/wiki/Levenshtein_distance 
 
