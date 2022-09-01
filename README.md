@@ -20,3 +20,8 @@ python3 setup.py install
 >>> levenshtein.levenshtein("DOG","DOGGOS")
 3
 ```
+
+## Test
+```bash
+python3 -m unittest test_levenshtein.py
+```
