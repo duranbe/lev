@@ -6,7 +6,7 @@
 
 int min(int num1, int num2);
 
-static int min(int num1, int num2) 
+int min(int num1, int num2) 
 {
     return (num1 > num2 ) ? num2 : num1;
 }
@@ -38,8 +38,6 @@ static PyObject *levenshtein(PyObject *self, PyObject *args){
           }
        
     }
-
-    int cost;
 
     for(int i=1; i<length_1+1; i++) {
         for(int j=1;j<length_2+1;j++) {
