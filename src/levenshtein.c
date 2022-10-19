@@ -4,6 +4,12 @@
 #include <unistd.h>
 #include <string.h>
 
+int min(int num1, int num2);
+
+static int min(int num1, int num2) 
+{
+    return (num1 > num2 ) ? num2 : num1;
+}
 /* PyObject : object  structure to define object types for Python */
 static PyObject *levenshtein(PyObject *self, PyObject *args){
 	
@@ -39,15 +45,11 @@ static PyObject *levenshtein(PyObject *self, PyObject *args){
         for(int j=1;j<length_2+1;j++) {
 
             if(string1[i-1] == string2[j-1]){
-                cost = 0 ;
+               tab[i][j] = tab[i-1][j-1];
             }else{
-                cost = 1 ;
+                tab[i][j] = 1 + min(tab[i-1][j-1],min(tab[i][j-1],tab[i-1][j]));
             }
 
-            if((tab[i-1][j]+1 <= tab[i][j-1]+1) && (tab[i-1][j]+1 <= tab[i-1][j-1]+cost)) tab[i][j] = tab[i-1][j]+1;
-            if((tab[i][j-1]+1 <= tab[i-1][j]+1) && (tab[i][j-1]+1 <= tab[i-1][j-1]+cost)) tab[i][j] = tab[i][j-1]+1;
-            if((tab[i-1][j-1]+cost <= tab[i][j-1]+1) && (tab[i-1][j-1]+cost <= tab[i-1][j]+1)) tab[i][j] = tab[i-1][j-1]+cost;
-            
         }
           
     }
