@@ -24,7 +24,7 @@ jobs:
         python-version: ${{ matrix.python-version }}
     - name: Install Python dev
       run: |
-        sudo apt-get install -y python-dev
+        sudo apt-get install -y python-dev && pip install setuptools
     - name: Build Lib
       run: |
         python3 setup.py install
